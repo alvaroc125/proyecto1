@@ -1,0 +1,22 @@
+tr:hover {
+    background-color: #0feb34;
+  }
+  input#filtro {
+    margin-top: 10px;
+    padding: 8px;
+    width: 220px;
+    background-color: #e6e20c; /* Fondo celeste claro */
+    border: 2px solid #e22807; /* Borde azul */
+    border-radius: 8px;
+    color: #da0a72;            /* Color de texto */
+    font-weight: bold;
+    font-size: 14px;
+    outline: none;
+ 
+  }
+  
+  input#filtro::placeholder {
+    color: #e41212;
+    opacity: 0.7;
+    
+  }

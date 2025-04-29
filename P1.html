@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla Dinamica</title>
+    <link rel="stylesheet" href="P1.css">
+
+
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 50%;
+            margin: 20px;
+            border: 2px solid #555;
+        }
+
+        caption {
+            font-size: 1.8em;
+            padding: 15px;
+            font-weight: bold;
+            color: rgb(3, 167, 231);
+            background: linear-gradient(45deg, #ff6b6b, #f5af19, #6bffb3, #6b83ff);
+            background-size: 400% 400%;
+            animation: cambiarColores 8s ease infinite;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes cambiarColores {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        th,
+        td {
+            border: 1px solid #d60505;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+
+    <style>
+        body {
+            background-color: rgb(225, 228, 25);
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            width: 70%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #6407d4;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #d83a12;
+            color: rgb(17, 17, 17);
+        }
+
+        input {
+            width: 90%;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .positivo {
+            color: green;
+            font-weight: bold;
+        }
+
+        .negativo {
+            color: rgb(214, 16, 16);
+            font-weight: bold;
+        }
+    </style>
+    </head>
+
+    <body>
+        <table>
+
+            <h1>
+                <caption>Tabla de Ganancias y Pérdidas</caption>
+                <input type="text" id="filtro" onkeyup="filtrarTabla()" placeholder="Buscar mes..">
+            </h1>
+        </table>
+
+        <table id="miTabla">
+            <thead>
+            
+                    <th>Mes</th>
+                    <th>Ingresos ($)</th>
+                    <th>Gastos ($)</th>
+                    <th>Resultado</th>
+                
+                </tr>
+            </thead>
+            <body>
+    
+                <tr></tr>
+                <tr>     
+                    
+                    <td>Enero</td>
+                  <td><input  type="number"  id="ingreso1" placeholder="Ingresos" onchange="calcularFila(1)"></td>
+                    <td><input type="number" id="gasto1" placeholder="Gastos" onchange="calcularFila(1)"></td>
+                    <td id="resultado1"></td>
+                </tr>
+                <tr>
+                    <td>Febrero</td>
+                    <td><input type="number" id="ingreso2" placeholder="Ingresos" onchange="calcularFila(2)"></td>
+                    <td><input type="number" id="gasto2" placeholder="Gastos" onchange="calcularFila(2)"></td>
+                    <td id="resultado2"></td>
+                </tr>
+                <tr>
+                    <td>Marzo</td>
+                    <td><input type="number" id="ingreso3" placeholder="Ingresos" onchange="calcularFila(3)"></td>
+                    <td><input type="number" id="gasto3" placeholder="Gastos" onchange="calcularFila(3)"></td>
+                    <td id="resultado3"></td>
+                </tr>
+            </body>
+        </table>
+
+        <div style="text-align: center;">
+            <button onclick="calcularTotal('suma')">Sumar Ingresos y Gastos</button>
+            <button onclick="calcularTotal('resta')">Restar Gastos de Ingresos</button>
+        </div>
+
+        <script>
+            // Calcula el resultado (ingresos - gastos) por fila
+            function calcularFila(fila) {
+                const ingreso = parseFloat(document.getElementById('ingreso' + fila).value) || 0;
+                const gasto = parseFloat(document.getElementById('gasto' + fila).value) || 0;
+                const resultado = ingreso - gasto;
+
+                const celdaResultado = document.getElementById('resultado' + fila);
+                celdaResultado.innerText = resultado;
+
+                if (resultado >= 0) {
+                    celdaResultado.className = 'positivo';
+                } else {
+                    celdaResultado.className = 'negativo';
+                }
+            }
+
+            // Calcula el total general de ingresos y gastos
+            function calcularTotal(operacion) {
+                let total = 0;
+                for (let i = 1; i <= 3; i++) {
+                    const ingreso = parseFloat(document.getElementById('ingreso' + i).value) || 0;
+                    const gasto = parseFloat(document.getElementById('gasto' + i).value) || 0;
+
+                    if (operacion === 'suma') {
+                        total += ingreso + gasto;
+                    } else if (operacion === 'resta') {
+                        total += ingreso - gasto;
+                    }
+                }
+                alert(`El resultado total de la ${operacion} es: ${total}`);
+            }
+       
+        </script>
+<script src="P1.js"></script>
+
+    </body>
+
+</html>
